@@ -106,7 +106,9 @@ document.querySelectorAll('.button-primary').forEach(button =>{
     })
 
     cart.splice(remove, 1)
-    cartNum.innerHTML = cart.length
+
+    if (cart.length == 0) cartNum.innerHTML = ''
+    else cartNum.innerHTML = cart.length
 
   }
 
