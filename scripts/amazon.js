@@ -3,13 +3,11 @@ const productsGrid = document.querySelector('.products-grid')
 
 products.forEach(element => {
     
-    let quantity =``
+    let quantity;
     element.quantity = Math.round(Math.random()*10)
-    if (element.quantity <= 0) {
-      while (element.quantity > 0){
-        let randomNum = Math.round(Math.random()*10)
-        element.quantity = randomNum
-      }
+
+    while (element.quantity <= 0){ 
+      element.quantity = Math.round(Math.random()*10)
     }
 
     for (let i = 0; i<element.quantity; i++){
@@ -68,6 +66,7 @@ document.querySelectorAll('.button-primary').forEach(button =>{
   button.addEventListener('click', () =>{
     
     const productId = button.dataset.productId
+    const cartNum = document.querySelector('.cart-quantity')
 
     let matchingItem;
     for(let i =0; i<cart.length; i++){
@@ -88,7 +87,6 @@ document.querySelectorAll('.button-primary').forEach(button =>{
     )
   
     //number of items added to cart
-    const cartNum = document.querySelector('.cart-quantity')
     cartNum.innerHTML = cart.length
 
     //after efacts after clicked add to cart
@@ -97,18 +95,17 @@ document.querySelectorAll('.button-primary').forEach(button =>{
   
   }
     else {
-    //after efacts after clicked add to cart
+    //after efacts after remove
     document.getElementById(productId).style.opacity = 0 // chack mark
     document.getElementById(`${productId}button`).innerHTML = "Add to Cart"
 
-    let remove = false
+    let remove
+
     cart.forEach((cart, index) =>{
       if(cart.id == productId) remove = index
     })
 
     cart.splice(remove, 1)
-    
-    const cartNum = document.querySelector('.cart-quantity')
     cartNum.innerHTML = cart.length
 
   }
