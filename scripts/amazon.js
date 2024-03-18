@@ -76,7 +76,7 @@ document.querySelectorAll('.button-primary').forEach(button =>{
     }
 
     if(matchingItem != 1) cart.push({id: productId})
-    else alert("cannot add dublicate item")
+    else alert("cannot add dublicate items")
     
   })
 })
