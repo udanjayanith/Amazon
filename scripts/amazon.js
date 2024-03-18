@@ -49,12 +49,12 @@ products.forEach(element => {
 
           <div class="product-spacer"></div>
 
-          <div class="added-to-cart">
+          <div class="added-to-cart" id = "${element.id}">
             <img src="images/icons/checkmark.png">
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary" data-product-id = "${element.id}">
+          <button class="add-to-cart-button button-primary" data-product-id = "${element.id}" id = "${element.id}button">
             Add to Cart
           </button>
         </div>
@@ -90,10 +90,30 @@ document.querySelectorAll('.button-primary').forEach(button =>{
     //number of items added to cart
     const cartNum = document.querySelector('.cart-quantity')
     cartNum.innerHTML = cart.length
+
+    //after efacts after clicked add to cart
+    document.getElementById(productId).style.opacity = "100%" // chack mark
+    document.getElementById(`${productId}button`).innerHTML = "Remove"
   
   }
-    else alert("cannot add dublicate items")
-  
+    else {
+    //after efacts after clicked add to cart
+    document.getElementById(productId).style.opacity = 0 // chack mark
+    document.getElementById(`${productId}button`).innerHTML = "Add to Cart"
+
+    let remove = false
+    cart.forEach((cart, index) =>{
+      if(cart.id == productId) remove = index
+    })
+
+    cart.splice(remove, 1)
+    
+    const cartNum = document.querySelector('.cart-quantity')
+    cartNum.innerHTML = cart.length
+
+  }
+
+
   })
 })
 
