@@ -5,8 +5,9 @@ else cart = JSON.parse(localStorage.getItem('products'))
 const cartNum = document.querySelector('.cart-quantity')
 
 //cart quantity
-if (cart.length == 0) cartNum.innerHTML = ''
-else cartNum.innerHTML = cart.length
+//if (cart.length == 0) cartNum.innerHTML = ''
+//else cartNum.innerHTML = cart.length
+cartLength()
 
 
 //products
@@ -112,21 +113,22 @@ document.querySelectorAll('.button-primary').forEach(button =>{
     document.getElementById(productId).style.opacity = 0 // chack mark
     document.getElementById(`${productId}button`).innerHTML = "Add to Cart"
     
-    localStorage.setItem('products', JSON.stringify(cart))
-
+    //items removing for cart
     let remove
-
     cart.forEach((cart, index) =>{
       if(cart.id == productId) remove = index
     })
-
     cart.splice(remove, 1)
 
-    if (cart.length == 0) cartNum.innerHTML = ''
-    else cartNum.innerHTML = cart.length
+    localStorage.setItem('products', JSON.stringify(cart))
+    cartLength()
 
   }
 
   })
 })
 
+function cartLength(){
+  if (cart.length == 0) cartNum.innerHTML = ''
+  else cartNum.innerHTML = cart.length
+}
