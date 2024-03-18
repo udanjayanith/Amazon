@@ -1,3 +1,4 @@
+//products
 const productsGrid = document.querySelector('.products-grid')
 
 products.forEach(element => {
@@ -6,7 +7,8 @@ products.forEach(element => {
     element.quantity = Math.round(Math.random()*10)
     if (element.quantity <= 0) {
       while (element.quantity > 0){
-        element.quantity = Math.round(Math.random()*10)
+        let randomNum = Math.round(Math.random()*10)
+        element.quantity = randomNum
       }
     }
 
@@ -60,6 +62,8 @@ products.forEach(element => {
 
 });
 
+//adding items to cart
+
 document.querySelectorAll('.button-primary').forEach(button =>{
   button.addEventListener('click', () =>{
     
@@ -71,12 +75,25 @@ document.querySelectorAll('.button-primary').forEach(button =>{
       if(cart[i].id == productId) {
         matchingItem = 1
         i = cart.length
+        
       }else matchingItem = 0
 
     }
 
-    if(matchingItem != 1) cart.push({id: productId})
+    if(matchingItem != 1) {
+    cart.push(
+    {
+      id: productId
+    }
+    )
+  
+    //number of items added to cart
+    const cartNum = document.querySelector('.cart-quantity')
+    cartNum.innerHTML = cart.length
+  
+  }
     else alert("cannot add dublicate items")
-    
+  
   })
 })
+
