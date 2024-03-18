@@ -1,3 +1,14 @@
+
+if(JSON.parse(localStorage.getItem('products')) == null) console.log('null')
+else cart = JSON.parse(localStorage.getItem('products'))
+
+const cartNum = document.querySelector('.cart-quantity')
+
+//cart quantity
+if (cart.length == 0) cartNum.innerHTML = ''
+else cartNum.innerHTML = cart.length
+
+
 //products
 const productsGrid = document.querySelector('.products-grid')
 
@@ -60,13 +71,13 @@ products.forEach(element => {
 
 });
 
+
 //adding items to cart
 
 document.querySelectorAll('.button-primary').forEach(button =>{
   button.addEventListener('click', () =>{
-    
+
     const productId = button.dataset.productId
-    const cartNum = document.querySelector('.cart-quantity')
 
     let matchingItem;
     for(let i =0; i<cart.length; i++){
@@ -92,12 +103,16 @@ document.querySelectorAll('.button-primary').forEach(button =>{
     //after efacts after clicked add to cart
     document.getElementById(productId).style.opacity = "100%" // chack mark
     document.getElementById(`${productId}button`).innerHTML = "Remove"
+
+    localStorage.setItem('products', JSON.stringify(cart))
   
   }
     else {
     //after efacts after remove
     document.getElementById(productId).style.opacity = 0 // chack mark
     document.getElementById(`${productId}button`).innerHTML = "Add to Cart"
+    
+    localStorage.setItem('products', JSON.stringify(cart))
 
     let remove
 
@@ -111,7 +126,6 @@ document.querySelectorAll('.button-primary').forEach(button =>{
     else cartNum.innerHTML = cart.length
 
   }
-
 
   })
 })
