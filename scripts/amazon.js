@@ -1,6 +1,6 @@
 
 if(JSON.parse(localStorage.getItem('products')) == null) console.log('null')
-else cart = JSON.parse(localStorage.getItem('products'))
+//else cart = JSON.parse(localStorage.getItem('products'))
 
 const cartNum = document.querySelector('.cart-quantity')
 
