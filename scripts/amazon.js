@@ -88,6 +88,7 @@ document.querySelectorAll('.button-primary').forEach(button =>{
 
     // if item isn't in the cart adding item to cart
     if(matchingItem != 1) {
+      
     cart.push(
     {
       id: productId
@@ -97,11 +98,7 @@ document.querySelectorAll('.button-primary').forEach(button =>{
     afterClikingButton(productId)
   
   }
-    else {
-
-    afterClikingButton(productId)
-
-  }
+  else afterClikingButton(productId)
 
   })
 })
