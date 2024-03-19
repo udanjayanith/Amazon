@@ -1,9 +1,9 @@
-import { cart, cartLength } from "../data/cart"
+import { cart, cartLength } from "../data/cart.js"
+import { products } from "../data/products.js"
 
 if(JSON.parse(localStorage.getItem('products')) == null) console.log('null')
 //else cart = JSON.parse(localStorage.getItem('products'))
 
-const cartNum = document.querySelector('.cart-quantity')
 cartLength()
 
 //products added to the page
