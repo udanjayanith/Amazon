@@ -1,16 +1,10 @@
-
 if(JSON.parse(localStorage.getItem('products')) == null) console.log('null')
 //else cart = JSON.parse(localStorage.getItem('products'))
 
 const cartNum = document.querySelector('.cart-quantity')
-
-//cart quantity
-//if (cart.length == 0) cartNum.innerHTML = ''
-//else cartNum.innerHTML = cart.length
 cartLength()
 
-
-//products
+//products added to the page
 const productsGrid = document.querySelector('.products-grid')
 
 products.forEach(element => {
@@ -80,6 +74,7 @@ document.querySelectorAll('.button-primary').forEach(button =>{
 
     const productId = button.dataset.productId
 
+    // adding same item twice stopper
     let matchingItem;
     for(let i =0; i<cart.length; i++){
 
@@ -91,44 +86,60 @@ document.querySelectorAll('.button-primary').forEach(button =>{
 
     }
 
+    // if item isn't in the cart adding item to cart
     if(matchingItem != 1) {
     cart.push(
     {
       id: productId
     }
     )
-  
-    //number of items added to cart
-    cartNum.innerHTML = cart.length
-
-    //after efacts after clicked add to cart
-    document.getElementById(productId).style.opacity = "100%" // chack mark
-    document.getElementById(`${productId}button`).innerHTML = "Remove"
-
-    localStorage.setItem('products', JSON.stringify(cart))
+    
+    afterClikingButton(productId)
   
   }
     else {
-    //after efacts after remove
-    document.getElementById(productId).style.opacity = 0 // chack mark
-    document.getElementById(`${productId}button`).innerHTML = "Add to Cart"
-    
-    //items removing for cart
-    let remove
-    cart.forEach((cart, index) =>{
-      if(cart.id == productId) remove = index
-    })
-    cart.splice(remove, 1)
 
-    localStorage.setItem('products', JSON.stringify(cart))
-    cartLength()
+    afterClikingButton(productId)
 
   }
 
   })
 })
 
+
+
 function cartLength(){
   if (cart.length == 0) cartNum.innerHTML = ''
   else cartNum.innerHTML = cart.length
+}
+
+//
+
+function afterClikingButton(productId){
+
+  const checkmark = document.getElementById(productId)
+  const yellowButton = document.getElementById(`${productId}button`)
+
+  if(checkmark.style.opacity == 0){
+
+    checkmark.style.opacity = "100%"
+    yellowButton.innerHTML = "Remove"
+
+  }else {
+
+    checkmark.style.opacity = 0
+    yellowButton.innerHTML = "Add to Cart"
+
+    //removing items from cart
+    let remove
+    cart.forEach((cart, index) =>{
+      if(cart.id == productId) remove = index
+    })
+    cart.splice(remove, 1)
+
+  }
+
+  cartLength()
+  localStorage.setItem('products', JSON.stringify(cart))
+
 }
