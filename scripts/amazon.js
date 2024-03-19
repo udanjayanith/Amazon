@@ -1,3 +1,4 @@
+
 if(JSON.parse(localStorage.getItem('products')) == null) console.log('null')
 //else cart = JSON.parse(localStorage.getItem('products'))
 
@@ -104,14 +105,6 @@ document.querySelectorAll('.button-primary').forEach(button =>{
 })
 
 
-
-function cartLength(){
-  if (cart.length == 0) cartNum.innerHTML = ''
-  else cartNum.innerHTML = cart.length
-}
-
-//
-
 function afterClikingButton(productId){
 
   const checkmark = document.getElementById(productId)
@@ -128,11 +121,10 @@ function afterClikingButton(productId){
     yellowButton.innerHTML = "Add to Cart"
 
     //removing items from cart
-    let remove
-    cart.forEach((cart, index) =>{
-      if(cart.id == productId) remove = index
+    cart.forEach((cartItem, index) =>{
+      if(cartItem.id == productId) cart.splice(index, 1)
     })
-    cart.splice(remove, 1)
+    
 
   }
 
