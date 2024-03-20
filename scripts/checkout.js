@@ -21,7 +21,7 @@ cart.forEach(itemsInCart => {
             num +=((product.prize*itemsInCart.quantity)/100)
             paymentSummaryMoney.innerHTML = num.toFixed(2)
 
-            if(num.toFixed(2) > 100) tax = 8
+            if(num.toFixed(2) > 100) tax = 6
             else tax = 4
             shippingAndHandling.innerHTML = (num*(tax/100)).toFixed(2)
             beforeTax.innerHTML = (num *(tax*2/100)).toFixed(2)
