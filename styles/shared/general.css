@@ -99,3 +99,11 @@ select:focus,
 input:focus {
   outline: 2px solid rgb(255, 153, 0);
 }
+
+.limit {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* Adjust the number of lines to show */
+  -webkit-box-orient: vertical;
+}
