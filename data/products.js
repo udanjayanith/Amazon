@@ -1,4 +1,4 @@
-export const products = [
+const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     image: "images/products/athletic-cotton-socks-6-pairs.jpg",
@@ -658,3 +658,49 @@ export const products = [
     ]
   }
 ];
+
+function renderProducts(productsGrid, element, quantity){
+
+  productsGrid.innerHTML += `
+  <div class="product-container">
+        <div class="product-image-container">
+          <img class="product-image"
+            src="${element.image}">
+        </div>
+
+        <div class="product-name limit-text-to-2-lines">
+          ${element.name}
+        </div>
+
+        <div class="product-rating-container">
+          <img class="product-rating-stars"
+            src="images/ratings/rating-${element.rating.stars*10}.png">
+          <div class="product-rating-count link-primary">
+            ${element.rating.count}
+          </div>
+        </div>
+
+        <div class="product-price">
+        $${(element.prize / 100).toFixed(2)}
+        </div>
+
+        <div class="product-quantity-container">
+          <select class="quantity" id="${element.id}quantity">
+              ${quantity}
+          </select>
+        </div>
+
+        <div class="product-spacer"></div>
+
+        <div class="added-to-cart" id = "${element.id}">
+          <img src="images/icons/checkmark.png">
+          Added
+        </div>
+
+        <button class="add-to-cart-button button-primary" data-product-id = "${element.id}" id = "${element.id}button">
+          Add to Cart
+        </button>
+      </div>
+  `
+
+}

@@ -1,9 +1,3 @@
-import { cart, cartLength } from "../data/cart.js"
-import { products } from "../data/products.js"
-
-if(JSON.parse(localStorage.getItem('products')) == null) console.log('null')
-//else cart = JSON.parse(localStorage.getItem('products'))
-
 cartLength()
 
 //products added to the page
@@ -24,47 +18,11 @@ products.forEach(element => {
         `
     }
 
-    productsGrid.innerHTML += `
-    <div class="product-container">
-          <div class="product-image-container">
-            <img class="product-image"
-              src="${element.image}">
-          </div>
+    renderProducts(productsGrid, element, quantity)
 
-          <div class="product-name limit-text-to-2-lines">
-            ${element.name}
-          </div>
-
-          <div class="product-rating-container">
-            <img class="product-rating-stars"
-              src="images/ratings/rating-${element.rating.stars*10}.png">
-            <div class="product-rating-count link-primary">
-              ${element.rating.count}
-            </div>
-          </div>
-
-          <div class="product-price">
-          $${(element.prize / 100).toFixed(2)}
-          </div>
-
-          <div class="product-quantity-container">
-            <select class="quantity">
-                ${quantity}
-            </select>
-          </div>
-
-          <div class="product-spacer"></div>
-
-          <div class="added-to-cart" id = "${element.id}">
-            <img src="images/icons/checkmark.png">
-            Added
-          </div>
-
-          <button class="add-to-cart-button button-primary" data-product-id = "${element.id}" id = "${element.id}button">
-            Add to Cart
-          </button>
-        </div>
-    `
+    cart.forEach(cartItem =>{
+      if(cartItem.id == element.id) afterClikingButton(element.id)
+    })
 
 });
 
@@ -89,11 +47,13 @@ document.querySelectorAll('.button-primary').forEach(button =>{
     }
 
     // if item isn't in the cart adding item to cart
+    const quantity = document.getElementById(`${productId}quantity`)
     if(matchingItem != 1) {
       
     cart.push(
     {
-      id: productId
+      id: productId,
+      quantity: quantity.value
     }
     )
     
