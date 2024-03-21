@@ -84,15 +84,11 @@ function itemsInCartRender(product, itemsInCart){
   </div>
     
     `
-    //const deleteButton = document.querySelectorAll('.delete-quantity-link')
-    //deleteButton.forEach(button =>{
-    //  button.addEventListener('click', deleteCartItem)
-    //})
-   
+
 }
 
+//delete items frome cart
 function deleteCartItem(productID){
-  //console.log(productID)
   cart.forEach((cartItem, index) =>{
     if(cartItem.id == productID) cart.splice(index, 1)
     localStorage.setItem('products', JSON.stringify(cart))
