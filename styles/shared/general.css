@@ -107,3 +107,9 @@ input:focus {
   -webkit-line-clamp: 5; /* Adjust the number of lines to show */
   -webkit-box-orient: vertical;
 }
+
+.update-quantity-link{
+  background-color: rgba(255, 222, 173, 0);
+  border: none;
+  font-size: medium;
+}

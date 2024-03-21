@@ -13,8 +13,10 @@ const orderTotal = document.querySelector('.order-total')
 cart.forEach(itemsInCart => {
     products.forEach(product => {
         if(product.id == itemsInCart.id) {
+          
             itemsInCartRender(product, itemsInCart)
 
+            //Order Summary
             typeOfItems.innerHTML = cart.length
             items.innerHTML = `Items (${typeOfItems.innerHTML}):`
             
@@ -39,7 +41,7 @@ cart.forEach(itemsInCart => {
 function itemsInCartRender(product, itemsInCart){
     orderSummary.innerHTML += 
     `
-    <div class="cart-item-container">
+    <div class="cart-item-container" data-product-id = "${itemsInCart.id}">
     <div class="delivery-date">
       Delivery date: Tuesday, June 21
     </div>
@@ -62,9 +64,9 @@ function itemsInCartRender(product, itemsInCart){
           <span class="update-quantity-link link-primary">
             Update
           </span>
-          <span class="delete-quantity-link link-primary">
+          <button class="delete-quantity-link link-primary update-quantity-link" onclick ="deleteCartItem('${itemsInCart.id}')">
             Delete
-          </span>
+          </button>
         </div>
       </div>
 
@@ -82,5 +84,18 @@ function itemsInCartRender(product, itemsInCart){
   </div>
     
     `
+    //const deleteButton = document.querySelectorAll('.delete-quantity-link')
+    //deleteButton.forEach(button =>{
+    //  button.addEventListener('click', deleteCartItem)
+    //})
    
+}
+
+function deleteCartItem(productID){
+  //console.log(productID)
+  cart.forEach((cartItem, index) =>{
+    if(cartItem.id == productID) cart.splice(index, 1)
+    localStorage.setItem('products', JSON.stringify(cart))
+    location.reload();
+  })
 }
