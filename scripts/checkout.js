@@ -10,34 +10,48 @@ const estimatedTax = document.querySelector('.estimated-tax')
 let tax = 0
 const orderTotal = document.querySelector('.order-total')
 
-cart.forEach(itemsInCart => {
+//checkoutCenter
+checkoutCenter()
+function checkoutCenter(){
+  cart.forEach(itemsInCart => {
     products.forEach(product => {
+
         if(product.id == itemsInCart.id) {
-          
             itemsInCartRender(product, itemsInCart)
-
-            //Order Summary
-            typeOfItems.innerHTML = cart.length
-            items.innerHTML = `Items (${typeOfItems.innerHTML}):`
-            
-            num +=((product.prize*itemsInCart.quantity)/100)
-            paymentSummaryMoney.innerHTML = num.toFixed(2)
-          
-            if(num.toFixed(2) > 100) tax = 6
-            else tax = 4
-            shippingAndHandling.innerHTML = (num*(tax/100)).toFixed(2)
-            beforeTax.innerHTML = (num *(tax*2/100)).toFixed(2)
-          
-            estimatedTax.innerHTML = (num*(10/100)).toFixed(2)
-          
-            orderTotal.innerHTML = (num+(num*(tax/100))+(num *(tax*2/100))+(num*(10/100))).toFixed(2)
-
+            orderSummaryRender(true, itemsInCart ,product)
         }
         
     })
 });
+}
 
+function orderSummaryRender(parametter, itemsInCart, product){
+  if(parametter == true){
+    //Order Summary
+    typeOfItems.innerHTML = cart.length
+    items.innerHTML = `Items (${typeOfItems.innerHTML}):`
+    
+    num +=((product.prize*itemsInCart.quantity)/100)
+    paymentSummaryMoney.innerHTML = num.toFixed(2)
+  
+    if(num.toFixed(2) > 100) tax = 6
+    else tax = 4
+    shippingAndHandling.innerHTML = (num*(tax/100)).toFixed(2)
+    beforeTax.innerHTML = (num *(tax*2/100)).toFixed(2)
+  
+    estimatedTax.innerHTML = (num*(10/100)).toFixed(2)
+  
+    orderTotal.innerHTML = (num+(num*(tax/100))+(num *(tax*2/100))+(num*(10/100))).toFixed(2)
 
+  } else if(parametter == false){
+
+    orderSummary.innerHTML = ''
+    checkoutCenter()
+  }
+
+}
+
+//function for rendering items in cart that diractly connected to checkoutCenter
 function itemsInCartRender(product, itemsInCart){
     orderSummary.innerHTML += 
     `
@@ -87,11 +101,18 @@ function itemsInCartRender(product, itemsInCart){
 
 }
 
-//delete items frome cart
+//the function run when someone click on the delete button on item div
+//this'll remove item from cart and rerender the checkout center
 function deleteCartItem(productID){
-  cart.forEach((cartItem, index) =>{
-    if(cartItem.id == productID) cart.splice(index, 1)
-    localStorage.setItem('products', JSON.stringify(cart))
-    location.reload();
+  cart.forEach((cartItem, index) =>{  
+    products.forEach(product => {
+
+      if(cartItem.id == productID && cartItem.id == product.id) {
+        cart.splice(index, 1)
+        orderSummaryRender(false, cartItem, product)
+      }
+
+    })
   })
 }
+
