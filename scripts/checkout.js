@@ -29,7 +29,7 @@ function orderSummaryRender(parametter, itemsInCart, product){
   if(parametter == true){
     //Order Summary
     typeOfItems.innerHTML = cart.length
-    items.innerHTML = `Items (${typeOfItems.innerHTML}):`
+    items.innerHTML = `Items (${cart.length}):`
     
     num +=((product.prize*itemsInCart.quantity)/100)
     paymentSummaryMoney.innerHTML = num.toFixed(2)
@@ -44,6 +44,19 @@ function orderSummaryRender(parametter, itemsInCart, product){
     orderTotal.innerHTML = (num+(num*(tax/100))+(num *(tax*2/100))+(num*(10/100))).toFixed(2)
 
   } else if(parametter == false){
+
+    let cartLength = cart.length
+    if(cart.length == 0) cartLength = 'No product selected'
+    //Order Summary
+    typeOfItems.innerHTML = cartLength
+    items.innerHTML = `Items (${cartLength}):`    
+    paymentSummaryMoney.innerHTML = '$0.00'
+    shippingAndHandling.innerHTML = '$0.00'
+    beforeTax.innerHTML = '$0.00' 
+    estimatedTax.innerHTML = '$0.00'
+    orderTotal.innerHTML = '$0.00'
+    num =0
+    tax = 0
 
     orderSummary.innerHTML = ''
     checkoutCenter()
@@ -109,6 +122,7 @@ function deleteCartItem(productID){
 
       if(cartItem.id == productID && cartItem.id == product.id) {
         cart.splice(index, 1)
+        localStorage.setItem('products', JSON.stringify(cart))
         orderSummaryRender(false, cartItem, product)
       }
 
